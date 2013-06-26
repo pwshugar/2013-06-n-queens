@@ -57,37 +57,65 @@
 
     // todo: fill in all these functions - they'll help you!
 
-    hasRowConflictAt: function(rowIndex){
-      var row = this.get(rowIndex);
-      var sum = _.reduce(row, function(memo, num){return memo + num;}, 0);
+    moreThanOne: function(array) {
+      var sum = _.reduce(array, function(memo, num){return memo + num;}, 0);
       return (sum>1) ? true : false;
+    },
+
+    hasRowConflictAt: function(rowIndex){
+      return this.moreThanOne(this.get(rowIndex));
     },
 
     hasAnyRowConflicts: function(){
       var rows = this.rows();
-      var memo = false;
+      var that = this;
 
-      for(var i=0; i<rows.length; i++) {
-        memo = memo || this.hasRowConflictAt(i);
-      }
-
-      return memo;
+      return _.some(rows, function(row) {
+        return that.moreThanOne(row);
+      });
     },
 
     hasColConflictAt: function(colIndex){
-      
+      var rows = this.rows();
+      var sum = 0;
+
+      for(var i=0; i<rows.length; i++) {
+        sum += rows[i][colIndex];
+      }
+
+      return (sum>1) ? true : false;
     },
 
     hasAnyColConflicts: function(){
-      return false; // fixme
+      for(var i=0; i<this.rows().length; i++) {
+        if(this.hasColConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
     },
 
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow){
-      return false; // fixme
+      var rows = this.rows();
+
+      var sum = 0;
+      var rowIndex = 0;
+
+      for(var i=majorDiagonalColumnIndexAtFirstRow; i<rows.length; i++) {
+        sum += rows[rowIndex][i];
+        rowIndex++;
+      }
+
+      return (sum>1) ? true : false;
     },
 
     hasAnyMajorDiagonalConflicts: function(){
-      return false; // fixme
+      for(var i=0; i<this.rows().length-1; i++) {
+        if(this.hasMajorDiagonalConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
     },
 
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow){
