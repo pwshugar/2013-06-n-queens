@@ -119,11 +119,26 @@
     },
 
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow){
-      return false; // fixme
+      var rows = this.rows();
+
+      var sum = 0;
+      var rowIndex = 0;
+
+      for(var i=minorDiagonalColumnIndexAtFirstRow; i>=0; i--) {
+        sum += rows[rowIndex][i];
+        rowIndex++;
+      }
+
+      return (sum>1) ? true : false;
     },
 
     hasAnyMinorDiagonalConflicts: function(){
-      return false; // fixme
+      for(var i=1; i<this.rows().length; i++) {
+        if(this.hasMinorDiagonalConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
     }
 
   });
