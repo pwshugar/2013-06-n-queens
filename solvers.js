@@ -37,15 +37,14 @@ window.makeBoard = function(n) {
 };
 
 window.findNQueensSolution = function(n, findAllSolutions) {
-  var solution = [];
+  var solution = makeBoard(n);
+  var testBoard = new Board(solution);
+
+  debugger;
+
   findAllSolutions = findAllSolutions || false;
 
-  for (var i = 0; i < n; i++) {
-    solution.push([]);
-    for (var j = 0; j < n; j++) {
-      solution[i].push(0);
-    }
-  }
+
 
 
 
