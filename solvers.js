@@ -3,14 +3,24 @@
 // (There are also optimizations that will allow you to skip a lot of the dead search space)
 
 window.findNRooksSolution = function(n){
-  var solution = undefined; //fixme
+  var solution = [];
 
-  console.log('Single solution for ' + n + ' rooks:', solution);
+  for (var i = 0; i < n; i++) {
+    solution.push([]);
+    for (var j = 0; j < n; j++) {
+      (i===j) ? solution[i].push(1) : solution[i].push(0);
+    }
+  }
+  //console.log('Single solution for ' + n + ' rooks:', solution);
   return solution;
 };
 
 window.countNRooksSolutions = function(n){
-  var solutionCount = undefined; //fixme
+  var solutionCount = 1;
+
+  for (var i = solutionCount; i <= n; i++) {
+    solutionCount = solutionCount * i;
+  }
 
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
   return solutionCount;
