@@ -49,12 +49,30 @@ describe("Board", function() {
     ]);
   });
 
+  it("should find major diagonal conflicts for lower diagonals at the first column", function() {
+    verifyConflictTypes(['majorDiagonal', 'queens'], [
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [1, 0, 0, 0],
+      [0, 1, 0, 0]
+    ]);
+  });
+
   it("should find minor diagonal conflicts", function() {
     verifyConflictTypes(['minorDiagonal', 'queens'], [
       [0, 0, 1, 0],
       [0, 0, 0, 0],
       [1, 0, 0, 0],
       [0, 0, 0, 0]
+    ]);
+  });
+
+    it("should find minor diagonal conflicts for lower diagonals at the last column", function() {
+    verifyConflictTypes(['minorDiagonal', 'queens'], [
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 1],
+      [0, 0, 1, 0]
     ]);
   });
 

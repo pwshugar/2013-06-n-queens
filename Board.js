@@ -102,7 +102,9 @@
       var rowIndex = 0;
 
       for(var i=majorDiagonalColumnIndexAtFirstRow; i<rows.length; i++) {
-        sum += rows[rowIndex][i];
+        if((i>-1)&&(rowIndex<rows.length)) {
+          sum += rows[rowIndex][i];
+        }
         rowIndex++;
       }
 
@@ -110,7 +112,10 @@
     },
 
     hasAnyMajorDiagonalConflicts: function(){
-      for(var i=0; i<this.rows().length-1; i++) {
+      var n = this.rows().length;
+      var start = (n-2)*-1;
+
+      for(var i=start; i<n-1; i++) {
         if(this.hasMajorDiagonalConflictAt(i)) {
           return true;
         }
@@ -125,7 +130,9 @@
       var rowIndex = 0;
 
       for(var i=minorDiagonalColumnIndexAtFirstRow; i>=0; i--) {
-        sum += rows[rowIndex][i];
+        if((i<rows.length)&&(rowIndex<rows.length)) {
+          sum += rows[rowIndex][i];
+        }
         rowIndex++;
       }
 
@@ -133,7 +140,8 @@
     },
 
     hasAnyMinorDiagonalConflicts: function(){
-      for(var i=1; i<this.rows().length; i++) {
+      var n = this.rows().length;
+      for(var i=1; i< n + (n-2); i++) {
         if(this.hasMinorDiagonalConflictAt(i)) {
           return true;
         }
