@@ -3,15 +3,12 @@
 // (There are also optimizations that will allow you to skip a lot of the dead search space)
 
 window.findNRooksSolution = function(n){
-  var solution = [];
+  var solution = makeBoard(n);
 
   for (var i = 0; i < n; i++) {
-    solution.push([]);
-    for (var j = 0; j < n; j++) {
-      (i===j) ? solution[i].push(1) : solution[i].push(0);
-    }
+    solution[i][i] = 1;
   }
-  //console.log('Single solution for ' + n + ' rooks:', solution);
+
   return solution;
 };
 
@@ -26,8 +23,31 @@ window.countNRooksSolutions = function(n){
   return solutionCount;
 };
 
-window.findNQueensSolution = function(n){
-  var solution = undefined; //fixme
+window.makeBoard = function(n) {
+  var board = [];
+
+  for (var i = 0; i < n; i++) {
+    board.push([0]);
+    for (var j = 1; j < n; j++) {
+      board[i].push(0);
+    }
+  }
+
+  return board;
+};
+
+window.findNQueensSolution = function(n, findAllSolutions) {
+  var solution = [];
+  findAllSolutions = findAllSolutions || false;
+
+  for (var i = 0; i < n; i++) {
+    solution.push([]);
+    for (var j = 0; j < n; j++) {
+      solution[i].push(0);
+    }
+  }
+
+
 
   console.log('Single solution for ' + n + ' queens:', solution);
   return solution;
