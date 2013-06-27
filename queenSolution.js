@@ -61,7 +61,8 @@ var changeBoard = function(board, rowNum){
 var result = [];
 
 var recurse = function(board){
-	//debugger;
+	debugger;
+	console.log("called queenSOl");
 	var n = board.length;
 	var oldBoard = board.clone();
 	if (!checkBoard(board)){

@@ -4,11 +4,20 @@
 
 
 window.findNRooksSolution = function(n){
-  result = [];
-  recurse(makeBoard(n));
+  rookSolutions = [];
 
-  return result[0];
+  permuter(_.range(n),[]);
+
+  return rookSolutions[0];
 };
+
+// window.findNRooksSolution = function(n){
+//   result = [];
+//   var solutions = recurse(makeBoard(n));
+
+//   return result[0];
+// };
+
 
 window.countNRooksSolutions = function(n){
   var solutionCount = 1;
