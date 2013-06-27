@@ -2,6 +2,54 @@
 // hint: you'll need to do a full-search of all possible arrangements of pieces!
 // (There are also optimizations that will allow you to skip a lot of the dead search space)
 
+var rookSolutions = [];
+
+var permuter = function(array, sol) {
+  if(array.length===0) {
+    console.log("Solutions: " , sol);
+    rookSolutions.push(sol.slice(0));
+    return;
+  }
+
+  for(var i=0; i<array.length; i++) {
+    var x = array.splice(i, 1)[0];
+    sol.push(x);
+    var y = permuter(array, sol);
+    sol.pop();
+    array.splice(i, 0, x);
+  }
+};
+
+var makeIntegerArray = function(n) {
+  var arr = [];
+
+  for(var i=0; i<n; i++) {
+    arr.push(i+1);
+  }
+
+  return arr;
+};
+
+var makePermArray = function(n) {
+  var possiblePositions = makeBoard(n);
+
+  for(var i=0; i<n; i++) {
+    possiblePositions[i][i] = 1;
+  }
+
+  return possiblePositions;
+};
+
+window.findNRooksSolution2 = function(n){
+  var solution = makeBoard(n);
+
+  rookSolutions = [];
+
+  permuter(makeIntegerArray(n),[]);
+
+  return rookSolutions.length;
+};
+
 window.findNRooksSolution = function(n){
   var solution = makeBoard(n);
 
@@ -11,6 +59,8 @@ window.findNRooksSolution = function(n){
 
   return solution;
 };
+
+
 
 window.countNRooksSolutions = function(n){
   var solutionCount = 1;
@@ -44,7 +94,12 @@ window.findNQueensSolution = function(n, findAllSolutions) {
 
   findAllSolutions = findAllSolutions || false;
 
-
+  for(var i = 0; i < n; i++){
+    testBoard.togglePiece(0, i);
+    for (var j = 0; j < n; j++) {
+      if(passesConflicts(j)){}
+    }
+  }
 
 
 
