@@ -31,18 +31,20 @@ window.countNRooksSolutions = function(n){
 };
 
 window.findNQueensSolution = function(n) {
-  // var result = [];
-  // recurse(makeBoard(n));
+  queenSolutions = [];
+  makeQueenBoards(_.range(n),[]);
 
-  // return result[0];
-  //console.log('Single solution for ' + n + ' queens:', solution);
+  console.log("Queen solution for " , n , queenSolutions[0]);
+  
+  return queenSolutions[0] || makeEmptyBoard(n);
 };
 
 window.countNQueensSolutions = function(n){
-  var solutionCount = undefined; //fixme
+  queenSolutions = [];
+  makeQueenBoards(_.range(n),[]);
 
-  console.log('Number of solutions for ' + n + ' queens:', solutionCount);
-  return solutionCount;
+  console.log('Number of solutions for ' + n + ' queens:' , queenSolutions.length);
+  return queenSolutions.length || 0;
 };
 
 

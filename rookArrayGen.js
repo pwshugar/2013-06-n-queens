@@ -1,8 +1,8 @@
 var rookSolutions = [];
+var queenSolutions = [];
 
 var permuter = function(array, sol) {
   if(array.length===0) {
-    console.log("Solutions: " , sol);
     rookSolutions.push(sol.slice());
     return;
   }
@@ -12,6 +12,36 @@ var permuter = function(array, sol) {
     xSol.push(xArray.splice(i,1)[0]);
     permuter(xArray, xSol);
   }
+};
+
+var makeQueenBoards = function(array, sol) {
+  if(diagonalConflict(sol)) {
+    console.log("diag conflict");
+    return;
+  }
+  if(array.length===0) {
+    console.log("Found solution for queens!" , sol);
+    queenSolutions.push(sol.slice());
+    return;
+  }
+  for(var i=0; i<array.length; i++) {
+    xArray = array.slice();
+    xSol = sol.slice();
+    xSol.push(xArray.splice(i,1)[0]);
+    makeQueenBoards(xArray, xSol);
+  }
+};
+
+var diagonalConflict = function(arr){
+  var n = arr.length;
+  for (var i = 0; i < n; i++){
+    for (var j = i + 1; j < n; j++){
+      if (Math.abs(arr[j] - arr[i]) === Math.abs(j - i)) {
+        return true;
+      }
+    }
+  }
+  return false;
 };
 
 var makeEmptyBoard = function(n) {
